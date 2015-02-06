@@ -3,6 +3,7 @@ Simple Pong clone
 Controls
 ---------
 Left Paddle Movement: w and s
+
 Right Paddle Movement: up arrow and down arrow
 Exit: ESC
 
