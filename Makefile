@@ -1,5 +1,5 @@
 main: main.o Game.o Ball.o Paddle.o
-	g++ -o PaddleTennis -Wall -lSDL2 -lSDL2_image main.o Game.o Ball.o Paddle.o
+	g++ -o PaddleTennis -Wall -lSDL2 main.o Game.o Ball.o Paddle.o
 
 main.o: main.cpp
 	g++ -c main.cpp
