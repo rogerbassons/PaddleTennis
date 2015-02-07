@@ -15,14 +15,14 @@ Game::Game() {
 	ball_.setSize(ballSize_); 
 	ball_.launch(screenWidth_,screenHeight_);
 
-	padWidth_ = 20;
-	int padHeight = 100;
-	p1_.setSize(padWidth_,padHeight);
-	p2_.setSize(padWidth_,padHeight);
+	int padWidth = 20;
+	padHeight_ = 100;
+	p1_.setSize(padWidth,padHeight_);
+	p2_.setSize(padWidth,padHeight_);
 
 	int x,y;
-	y = screenHeight_/2-padHeight/2;
-	x = screenWidth_-padWidth_-5;
+	y = screenHeight_/2-padHeight_/2;
+	x = screenWidth_-padWidth-5;
 	p1_.setPosition(x,y);
 
 	x = 5;
@@ -100,9 +100,9 @@ void Game::getUserInput() {
 void Game::moveAutomaticallyP2() {
 	int paddleY = p2_.getY();
 	int ballY = ball_.getY();
-	if (ballY > paddleY+padWidth_)
+	if (ballY > paddleY+padHeight_)
 		p2_.accelerateDown();
-	else if (ballY < paddleY-padWidth_)
+	else if (ballY < paddleY-padHeight_)
 		p2_.accelerateUp();
 	else
 		p2_.stop();

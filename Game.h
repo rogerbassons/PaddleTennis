@@ -32,7 +32,7 @@ class Game {
 	void getUserInput();
 	void updateGame();
 
-	int padWidth_;
+	int padHeight_;
 	void moveAutomaticallyP2();
 };
 	
