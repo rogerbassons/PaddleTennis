@@ -30,7 +30,7 @@ Game::Game() {
 	p2_.setPosition(x,y);
 
 	onePlayer_ = true;
-	easy_ = true;
+	easy_ = false;
 }
 
 Game::~Game() {
