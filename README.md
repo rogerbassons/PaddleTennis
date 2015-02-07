@@ -1,5 +1,7 @@
 Simple Pong clone
 
+By default left paddle moves automatically. You can change between one player and to players with key "1" (number one).
+
 Controls
 ---------
 Left Paddle Movement: w and s

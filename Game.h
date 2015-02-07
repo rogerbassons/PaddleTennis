@@ -20,6 +20,7 @@ class Game {
 	SDL_Renderer *ren_;
 
 	bool end_;
+	bool onePlayer_;
 
 	Ball ball_;
 	int ballSize_; // ball is square
@@ -30,6 +31,9 @@ class Game {
 
 	void getUserInput();
 	void updateGame();
+
+	int padWidth_;
+	void moveAutomaticallyP2();
 };
 	
 	

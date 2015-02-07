@@ -15,18 +15,20 @@ Game::Game() {
 	ball_.setSize(ballSize_); 
 	ball_.launch(screenWidth_,screenHeight_);
 
-	int padWidth = 20;
+	padWidth_ = 20;
 	int padHeight = 100;
-	p1_.setSize(padWidth,padHeight);
-	p2_.setSize(padWidth,padHeight);
+	p1_.setSize(padWidth_,padHeight);
+	p2_.setSize(padWidth_,padHeight);
 
 	int x,y;
 	y = screenHeight_/2-padHeight/2;
-	x = screenWidth_-padWidth-5;
+	x = screenWidth_-padWidth_-5;
 	p1_.setPosition(x,y);
 
 	x = 5;
-	p2_.setPosition(x,y);	
+	p2_.setPosition(x,y);
+
+	onePlayer_ = true;
 }
 
 Game::~Game() {
@@ -76,26 +78,43 @@ void Game::getUserInput() {
 				p1_.accelerateUp();
 			else if (e.key.keysym.sym == SDLK_DOWN)
 				p1_.accelerateDown();
-			else if (e.key.keysym.sym == SDLK_w)
+			else if (not onePlayer_ and e.key.keysym.sym == SDLK_w)
 				p2_.accelerateUp();
-			else if (e.key.keysym.sym == SDLK_s)
+			else if (not onePlayer_ and e.key.keysym.sym == SDLK_s)
 				p2_.accelerateDown();
+			else if (e.key.keysym.sym == SDLK_1)
+				onePlayer_ = not onePlayer_;
 		} else if (e.type == SDL_KEYUP) {
 			if (e.key.keysym.sym == SDLK_UP)
 				p1_.stop();
 			else if (e.key.keysym.sym == SDLK_DOWN)
 				p1_.stop();
-			else if (e.key.keysym.sym == SDLK_w)
+			else if (not onePlayer_ and e.key.keysym.sym == SDLK_w)
 				p2_.stop();
-			else if (e.key.keysym.sym == SDLK_s)
+			else if (not onePlayer_ and e.key.keysym.sym == SDLK_s)
 				p2_.stop();
 		}
 	}
 }
 
+void Game::moveAutomaticallyP2() {
+	int paddleY = p2_.getY();
+	int ballY = ball_.getY();
+	if (ballY > paddleY+padWidth_)
+		p2_.accelerateDown();
+	else if (ballY < paddleY-padWidth_)
+		p2_.accelerateUp();
+	else
+		p2_.stop();
+}
+
 void Game::updateGame() {
-	p1_.move(screenHeight_);
+	if (onePlayer_) 
+		moveAutomaticallyP2();
+
 	p2_.move(screenHeight_);
+	p1_.move(screenHeight_);
+
 
 	int winner;
 	bool collided = ball_.move(screenWidth_,screenHeight_,p2_,p1_,winner);
