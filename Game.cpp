@@ -12,7 +12,8 @@ Game::Game() {
 	screenHeight_ = 768;
 	ballSize_ = 15;
 
-	ball_.setSize(ballSize_); 
+	ball_.setSize(ballSize_);
+	ball_.setLaunchSpeed(11);
 	ball_.launch(screenWidth_,screenHeight_);
 
 	int padWidth = 20;
@@ -29,6 +30,7 @@ Game::Game() {
 	p2_.setPosition(x,y);
 
 	onePlayer_ = true;
+	easy_ = true;
 }
 
 Game::~Game() {
@@ -84,6 +86,8 @@ void Game::getUserInput() {
 				p2_.accelerateDown();
 			else if (e.key.keysym.sym == SDLK_1)
 				onePlayer_ = not onePlayer_;
+			else if (e.key.keysym.sym == SDLK_2)
+				easy_ = not easy_;
 		} else if (e.type == SDL_KEYUP) {
 			if (e.key.keysym.sym == SDLK_UP)
 				p1_.stop();
@@ -100,12 +104,21 @@ void Game::getUserInput() {
 void Game::moveAutomaticallyP2() {
 	int paddleY = p2_.getY();
 	int ballY = ball_.getY();
-	if (ballY > paddleY+padHeight_)
-		p2_.accelerateDown();
-	else if (ballY < paddleY-padHeight_)
-		p2_.accelerateUp();
-	else
-		p2_.stop();
+	if (easy_) {
+		if (ballY > paddleY+padHeight_)
+			p2_.accelerateDown();
+		else if (ballY < paddleY-padHeight_)
+			p2_.accelerateUp();
+		else
+			p2_.stop();
+	} else {
+		if (ballY > paddleY)
+			p2_.accelerateDown();
+		else if (ballY < paddleY)
+			p2_.accelerateUp();
+		else
+			p2_.stop();
+	}
 }
 
 void Game::updateGame() {

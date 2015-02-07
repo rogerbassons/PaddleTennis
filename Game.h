@@ -21,6 +21,7 @@ class Game {
 
 	bool end_;
 	bool onePlayer_;
+	bool easy_;
 
 	Ball ball_;
 	int ballSize_; // ball is square
