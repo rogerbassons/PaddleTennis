@@ -106,7 +106,7 @@ bool Ball::move(int width, int height, const Paddle &left, const Paddle &right, 
 	if (collided) {
 		dx_ *= -1;
 		if (dy_ == 0)
-			dy_ = 1;
+			dy_ = 5;
 	}
 	
 	return collided;
