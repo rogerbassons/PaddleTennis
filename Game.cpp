@@ -85,7 +85,7 @@ void Game::getUserInput() {
 			else if (not onePlayer_ and e.key.keysym.sym == SDLK_s)
 				p2_.accelerateDown();
 			else if (e.key.keysym.sym == SDLK_1) {
-				p2_.stop()
+				p2_.stop();
 				onePlayer_ = not onePlayer_;
 			}
 			else if (e.key.keysym.sym == SDLK_2)
