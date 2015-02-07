@@ -7,6 +7,8 @@ class Ball {
 	Ball();
 	void setSize(int size);
 	void setLaunchSpeed(int speed);
+	int getX() const;
+	int getY() const;
 	
 	// inside rectangle width*height
 	void launch(int width, int height);

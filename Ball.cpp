@@ -18,6 +18,14 @@ void Ball::setLaunchSpeed(int speed) {
 	launchSpeed_ = speed;
 }
 
+int Ball::getX() const {
+	return b_.x;
+}
+
+int Ball::getY() const {
+	return b_.y;
+}
+
 void Ball::launch(int width, int height) {
 
 	b_.x = width/2 - b_.w/2;
