@@ -6,7 +6,7 @@
 Ball::Ball() {
 	b_.x = b_.y = b_.w = b_.h = 0;
 	launchSpeed_ = 6;
-	dx_ = 6;
+	dx_ = launchSpeed_;
 	dy_ = 0;
 }
 
@@ -26,27 +26,33 @@ int Ball::getY() const {
 	return b_.y;
 }
 
-void Ball::launch(int width, int height) {
-
-	b_.x = width/2 - b_.w/2;
-	b_.y = height/2 - b_.h;
-	
+int Ball::randomAngle(int min, int max) const {
 	std::random_device rd;
 	std::mt19937 mt(rd());
-	
+	std::uniform_int_distribution<int> dist(min,max);
+	return dist(mt);
+}
+
+int Ball::randomDirection() const {
+	std::random_device rd;
+	std::mt19937 mt(rd());
 	std::uniform_int_distribution<int> dist1(0,1);
 	int direction = dist1(mt);
 	if (direction == 0)
 		direction = -1;
-		
-	std::uniform_int_distribution<int> dist2(0,360);
-	int angle = dist2(mt);
-       
+	return direction;
+}
+
+void Ball::launch(int width, int height) {
+	b_.x = width/2 - b_.w/2;
+	b_.y = height/2 - b_.h;
+	
+	int angle = randomAngle(0,360);
+	int direction = randomDirection();
 	dx_ = direction * launchSpeed_ * cos(angle * M_PI/180.0);               
 	dy_ = launchSpeed_ * sin(angle * M_PI/180.0);
-	
 	if (dx_ == 0)
-		dx_ = 5;
+		dx_ = launchSpeed_;
 }
 
 bool Ball::hasCollidedWithAnyPaddle(int width, int height, const Paddle &left, const Paddle &right) {
@@ -92,16 +98,15 @@ bool Ball::move(int width, int height, const Paddle &left, const Paddle &right, 
 		dy_ *= -1;
 		nextY = height - b_.h;
 	}
+	
+	b_.x = nextX;
+	b_.y = nextY;
 
 	bool collided = hasCollidedWithAnyPaddle(width,height,left,right);
 	if (collided) {
 		dx_ *= -1;
-		if (dy_ == 0)
-			dy_ = 1;
 	}
 	
-	b_.x = nextX;
-	b_.y = nextY;
 	return collided;
 }
 

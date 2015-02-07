@@ -23,5 +23,7 @@ class Ball {
 	int dx_,dy_;
 
 	bool hasCollidedWithAnyPaddle(int width, int height, const Paddle &left, const Paddle &right);
+	int randomDirection() const;
+	int randomAngle(int min, int max) const;
 };
 	
