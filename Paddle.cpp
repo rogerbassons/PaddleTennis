@@ -4,7 +4,7 @@
 Paddle::Paddle() {
 	p_.x = p_.y = p_.w = p_.h = 0;
 	move_ = 0;
-	speed_ = 5;
+	speed_ = 10;
 }
 
 void Paddle::setSize(int width, int height) {
