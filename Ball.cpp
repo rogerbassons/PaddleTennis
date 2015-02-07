@@ -105,8 +105,18 @@ bool Ball::move(int width, int height, const Paddle &left, const Paddle &right, 
 	bool collided = hasCollidedWithAnyPaddle(width,height,left,right);
 	if (collided) {
 		dx_ *= -1;
+		int angle = 0;
+		if (dx_  > 0) {
+			angle = randomAngle(0,180);
+		} else {
+			angle = randomAngle(180,360);
+		}
+		dy_ = launchSpeed_ * sin(angle * M_PI/180.0);
+
+		/*			
 		if (dy_ == 0)
 			dy_ = 5;
+		*/
 	}
 	
 	return collided;
