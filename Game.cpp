@@ -13,7 +13,7 @@ Game::Game() {
 	ballSize_ = 15;
 
 	ball_.setSize(ballSize_); 
-	ball_.setPosition(screenWidth_/2-ballSize_/2,screenHeight_/2-ballSize_/2);
+	ball_.launch(screenWidth_,screenHeight_);
 
 	int padWidth = 20;
 	int padHeight = 100;
@@ -96,10 +96,16 @@ void Game::getUserInput() {
 void Game::updateGame() {
 	p1_.move(screenHeight_);
 	p2_.move(screenHeight_);
-	if (ball_.move(screenWidth_,screenHeight_,p2_,p1_))
+
+	int winner;
+	bool collided = ball_.move(screenWidth_,screenHeight_,p2_,p1_,winner);
+	if (collided)
 		bounces_++;
 
-	if (bounces_ == 10) {
+	if (winner == 0 or winner == 1) {
+		bounces_ = 0;
+		ball_.launch(screenWidth_,screenHeight_);
+	} else if (bounces_ == 10) {
 		bounces_ = 0;
 		ball_.moreSpeed();
 	}
