@@ -4,7 +4,7 @@ By default:
 
 - Left paddle moves automatically. You can change between one player and to players with key "1" (number one).
 
-- Difficulty level is normal. You can toggle between easy and normal difficulty with key "2" (number two).
+- Difficulty level is medium. You can toggle between easy and medium difficulty with key "2" (number two).
 
 Controls
 ---------
