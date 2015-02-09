@@ -107,16 +107,16 @@ void Game::moveAutomaticallyP2() {
 	int paddleY = p2_.getY();
 	int ballY = ball_.getY();
 	if (easy_) {
-		if (ballY > paddleY+padHeight_)
+		if (ballY+ballSize_/2 > paddleY+padHeight_)
 			p2_.accelerateDown();
-		else if (ballY < paddleY-padHeight_)
+		else if (ballY+ballSize_/2 < paddleY)
 			p2_.accelerateUp();
 		else
 			p2_.stop();
 	} else {
-		if (ballY > paddleY)
+		if (ballY+ballSize_/2 > paddleY+padHeight_/2)
 			p2_.accelerateDown();
-		else if (ballY < paddleY)
+		else if (ballY+ballSize_/2 < paddleY+padHeight_/2)
 			p2_.accelerateUp();
 		else
 			p2_.stop();
